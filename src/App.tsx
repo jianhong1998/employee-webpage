@@ -1,6 +1,6 @@
 import './App.scss';
 import EmployeeList from './components/employeeList/employeeList.component';
-import AddEmployeeButton from './components/ui/addEmployeeButton.component';
+import AddEmployeeButton from './components/ui/buttons/addEmployeeButton.component';
 
 function App() {
   return (

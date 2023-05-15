@@ -2,10 +2,10 @@ import classes from './employeeCard.module.scss';
 
 import { FC, MouseEventHandler } from 'react';
 import EmployeeDataModel from '../../models/employeeData.model';
-import EditButton from '../ui/editButton.component';
-import DeleteButton from '../ui/deleteButton.component';
 import { useAppDispatch } from '../../store/index.store';
 import { employeeActions } from '../../store/employee.slice';
+import DeleteButton from '../ui/buttons/deleteButton.component';
+import EditButton from '../ui/buttons/editButton.component';
 
 interface EmployeeCardProps {
     employee: EmployeeDataModel;

@@ -3,10 +3,10 @@ import classes from './addEmployeeButton.module.scss';
 import { FC, MouseEventHandler } from "react";
 import { Button } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useAppDispatch } from "../../store/index.store";
-import { employeeActions } from "../../store/employee.slice";
-import EmployeeDataModel from "../../models/employeeData.model";
-import DepartmentType from "../../models/departmentType.enum";
+import { useAppDispatch } from "../../../store/index.store";
+import { employeeActions } from "../../../store/employee.slice";
+import EmployeeDataModel from "../../../models/employeeData.model";
+import DepartmentType from "../../../models/departmentType.enum";
 
 let employeeIdRunning = 0;
 
