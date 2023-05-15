@@ -1,0 +1,22 @@
+.employeeCard {
+    width: 300px;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    background-color: var(--grey);
+    color: var(--employee-card-blue);
+    display: grid;
+    grid-template-columns: auto max-content;
+
+    .left {
+        .name {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+    }
+
+    .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
