@@ -1,0 +1,14 @@
+// Mobile view: < 991.98px
+// Web view: > 992px
+
+.employeeListContainer {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    gap: 1em;
+
+    @media only screen and (min-width: 992px) {
+        grid-template-columns: auto auto;
+        gap: 1em 2em;
+    }
+}

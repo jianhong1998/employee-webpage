@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 const indexStore = configureStore({
     reducer: {
-        employee: employeeSlice.reducer
+        employees: employeeSlice.reducer
     }
 });
 
