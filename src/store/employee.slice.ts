@@ -2,39 +2,46 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import EmployeeDataModel from "../models/employeeData.model";
 
 interface EmployeeState {
-    employeeMap: Map<number, EmployeeDataModel>;
+    employeeArray: EmployeeDataModel[];
     totalEmployee: number;
 }
+
+const initialEmployeeState: EmployeeState = {
+    employeeArray: [] as EmployeeDataModel[],
+    totalEmployee: 0
+};
 
 const addEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataModel>) => {
     const employee = action.payload;
     
-    state.employeeMap = state.employeeMap.set(employee.id, employee);
-    state.totalEmployee = state.employeeMap.size;
+    state.employeeArray.push(employee);
 };
 
 const editEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataModel>) => {
-    const inputEmployee = action.payload;
+    const { id, name, salary, department } = action.payload;
 
-    state.employeeMap = state.employeeMap.set(inputEmployee.id, inputEmployee);
-    state.totalEmployee = state.employeeMap.size;
+    state.employeeArray = state.employeeArray.map(employee => {
+        if (employee.id === id) {
+            employee.name = name;
+            employee.salary = salary;
+            employee.department = department;
+        }
+
+        return employee;
+    });
 };
 
 const deleteEmployee = (state: EmployeeState, action: PayloadAction<{employeeId: number}>) => {
     const { employeeId } = action.payload;
     
-    state.employeeMap.delete(employeeId);
-    state.totalEmployee = state.employeeMap.size;
+    state.employeeArray = state.employeeArray.filter(employee => employee.id !== employeeId);
 };
 
 
 
 const employeeSlice = createSlice({
     name: 'employeeSlice',
-    initialState: {
-        employeeMap: new Map<number, EmployeeDataModel>(),
-        totalEmployee: 0
-    } as EmployeeState,
+    initialState: initialEmployeeState,
     reducers: {
         addEmployee,
         editEmployee,
