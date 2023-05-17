@@ -54,7 +54,8 @@ const updateEmployeeFormSlice = createSlice({
     reducers: {
         updateName,
         updateSalary,
-        updateDepartment
+        updateDepartment,
+        clear
     }
 });
 

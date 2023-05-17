@@ -1,17 +1,19 @@
-import './App.scss';
-import EmployeeList from './components/employeeList/employeeList.component';
-import UpdateEmployeeForm from './components/forms/updateEmployeeForm.component';
-import AddEmployeeButton from './components/ui/buttons/addEmployeeButton.component';
-import Popup from './components/ui/popup/popup.component';
+import { Routes, Route } from 'react-router-dom';
+
+import Header from './components/header/header.component';
+import HomePage from './pages/home.page';
+import NewEmployeePage from './pages/newEmployee.page';
+import EditEmployeePage from './pages/editEmployee.page';
 
 function App() {
   return (
-    <>
-      {/* <AddEmployeeButton />
-      <EmployeeList pageNumber={1} />
-      <Popup /> */}
-      <UpdateEmployeeForm />
-    </>
+    <Routes>
+      <Route path='/' element={<Header />}>
+        <Route index element={<HomePage />} />
+        <Route path='/new-employee' element={<NewEmployeePage />} />
+        <Route path='/edit-employee' element={<EditEmployeePage />} />
+      </Route>
+    </Routes>
   );
 }
 
