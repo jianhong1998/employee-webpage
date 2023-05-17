@@ -1,0 +1,12 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    height: 10vh;
+    background-color: var(--employee-card-blue);
+}
+
+.title {
+    color: #ffffff;
+}

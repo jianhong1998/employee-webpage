@@ -13,20 +13,18 @@ interface EmployeeCardProps {
     employee: EmployeeDataModel;
 }
 
-const deleteEmployeeHandler = (employeeId: number) => {
-    const dispatch = useAppDispatch();
-
-    dispatch(employeeActions.deleteEmployee({employeeId}));
-    dispatch(popupActions.closePopup());
-}
-
-const updateEmployeeHandler = (updatedEmployee: EmployeeDataModel) => {
-
-}
-
 const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
     const { id, name, department, salary } = employee;
     const dispatch = useAppDispatch();
+    
+    const deleteEmployeeHandler = (employeeId: number) => {
+        dispatch(employeeActions.deleteEmployee({employeeId}));
+        dispatch(popupActions.closePopup());
+    }
+    
+    // const updateEmployeeHandler = (updatedEmployee: EmployeeDataModel) => {
+        
+    // }
 
     const deleteButtonOnclickHandler: MouseEventHandler = () => {
         const popupData = {
