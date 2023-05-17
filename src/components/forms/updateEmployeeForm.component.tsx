@@ -74,7 +74,6 @@ const UpdateEmployeeForm: FC = () => {
                 className={classes.input}
                 value={salaryInputData.dataValue}
                 onChange={salaryInputOnChangeHandler}
-
             />
             <TextField
                 id="update-employee-form-select-department"
