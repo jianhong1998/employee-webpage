@@ -15,6 +15,7 @@ const addEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataMod
     const employee = action.payload;
     
     state.employeeArray.push(employee);
+    state.totalEmployee = state.employeeArray.length;
 };
 
 const editEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataModel>) => {
