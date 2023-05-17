@@ -11,13 +11,16 @@ const Header: FC = () => {
                 <div>
                     <h1 className={`text-2xl font-black ${classes.title}`}>Employees</h1>
                 </div>
-                <div>
-                    <AddEmployeeButton />
-                </div>
+                {
+                    document.location.pathname === "/" &&
+                    <div>
+                        <AddEmployeeButton />
+                    </div>
+                }
             </header>
             <Outlet />
         </>
     );
-}
+};
 
 export default Header;
