@@ -8,6 +8,9 @@ import DeleteButton from '../ui/buttons/deleteButton.component';
 import EditButton from '../ui/buttons/editButton.component';
 import PopupData from '../../models/popupData.model';
 import { popupActions } from '../../store/popup.slice';
+import { updateEmployeeFormActions } from '../../store/updateEmployeeForm.slice';
+import InputData from '../../models/inputState.model';
+import { Link } from 'react-router-dom';
 
 interface EmployeeCardProps {
     employee: EmployeeDataModel;
@@ -21,10 +24,6 @@ const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
         dispatch(employeeActions.deleteEmployee({employeeId}));
         dispatch(popupActions.closePopup());
     }
-    
-    // const updateEmployeeHandler = (updatedEmployee: EmployeeDataModel) => {
-        
-    // }
 
     const deleteButtonOnclickHandler: MouseEventHandler = () => {
         const popupData = {
@@ -40,16 +39,24 @@ const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
     };
 
     const editButtonOnClickHandler: MouseEventHandler = () => {
-        const popupData = {
-            title: "Edit Employee",
-            content: <></>,
-            processButton: {
-                content: "Update",
-                // processHandler: () => updateEmployeeHandler()
-            }
-        } as PopupData;
+        dispatch(updateEmployeeFormActions.updateSalary({
+            dataValue: salary.toString(),
+            errorMessage: undefined
+        }));
 
-        dispatch(popupActions.openPopup(popupData));
+        dispatch(updateEmployeeFormActions.updateName({
+            dataValue: name,
+            errorMessage: undefined
+        }));
+        dispatch(updateEmployeeFormActions.updateDepartment({
+            dataValue: department,
+            errorMessage: undefined
+        }));
+
+        dispatch(updateEmployeeFormActions.updateId({
+            dataValue: id,
+            errorMessage: undefined
+        }));
     };
 
     return (
@@ -60,7 +67,9 @@ const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
                 <div>{salary}</div>
             </div>
             <div className={classes.right}>
-                <EditButton onClickHandler={editButtonOnClickHandler} />
+                <Link to={'/edit-employee'}>
+                    <EditButton onClickHandler={editButtonOnClickHandler} />
+                </Link>
                 <DeleteButton onClickHandler={deleteButtonOnclickHandler} />
             </div>
         </div>    

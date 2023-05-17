@@ -4,12 +4,17 @@ import DepartmentType from "../models/departmentType.enum";
 
 
 interface UpdateEmployeeFormState {
-    nameInputData: InputData<string>,
-    salaryInputData: InputData<string>,
-    departmentInputData: InputData<DepartmentType | undefined>
+    idInputData: InputData<number>;
+    nameInputData: InputData<string>;
+    salaryInputData: InputData<string>;
+    departmentInputData: InputData<DepartmentType | undefined>;
 }
 
 const initialUpdateEmployeeState: UpdateEmployeeFormState = {
+    idInputData: {
+        dataValue: -1,
+        errorMessage: undefined
+    },
     nameInputData: {
         dataValue: "",
         errorMessage: undefined
@@ -23,6 +28,11 @@ const initialUpdateEmployeeState: UpdateEmployeeFormState = {
         errorMessage: undefined
     }
 };
+
+const updateId = (state: UpdateEmployeeFormState, action: PayloadAction<InputData<number>>) => {
+    state.idInputData.dataValue = action.payload.dataValue;
+    state.idInputData.errorMessage = action.payload.errorMessage;
+}
 
 const updateName = (state: UpdateEmployeeFormState, action: PayloadAction<InputData<string>>) => {
     state.nameInputData.dataValue = action.payload.dataValue;
@@ -46,12 +56,15 @@ const clear = (state: UpdateEmployeeFormState) => {
     state.nameInputData.errorMessage = undefined;
     state.salaryInputData.dataValue = "";
     state.salaryInputData.errorMessage = undefined;
+    state.idInputData.dataValue = -1;
+    state.idInputData.errorMessage = undefined;
 };
 
 const updateEmployeeFormSlice = createSlice({
     name: 'updateEmployeeFormSlice',
     initialState: initialUpdateEmployeeState,
     reducers: {
+        updateId,
         updateName,
         updateSalary,
         updateDepartment,
