@@ -5,13 +5,15 @@ import { useDispatch } from 'react-redux';
 import popupSlice from './popup.slice';
 import updateEmployeeFormSlice from './updateEmployeeForm.slice';
 import appHeaderSlice from './appHeader.slice';
+import loadingSlice from './loading.slice';
 
 const indexStore = configureStore({
     reducer: {
         employees: employeeSlice.reducer,
         popup: popupSlice.reducer,
         updateEmployeeForm: updateEmployeeFormSlice.reducer,
-        appTitle: appHeaderSlice.reducer
+        appTitle: appHeaderSlice.reducer,
+        loading: loadingSlice.reducer
     }
 });
 
