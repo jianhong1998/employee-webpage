@@ -18,7 +18,7 @@ const theme = createTheme({
 const AddEmployeeButton: FC = () => {
     const dispatch = useAppDispatch();
 
-    const [windowSize, setWindowSize] = useState(window.innerWidth);
+    const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
     const linkRef = useRef<HTMLAnchorElement>(null);
 
     const handleResize = () => {

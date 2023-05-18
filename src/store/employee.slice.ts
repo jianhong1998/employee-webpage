@@ -4,11 +4,13 @@ import EmployeeDataModel from "../models/employeeData.model";
 interface EmployeeState {
     employeeArray: EmployeeDataModel[];
     totalEmployee: number;
+    pageIndex: number;
 }
 
 const initialEmployeeState: EmployeeState = {
     employeeArray: [] as EmployeeDataModel[],
-    totalEmployee: 0
+    totalEmployee: 0,
+    pageIndex: 0
 };
 
 const addEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataModel>) => {
@@ -30,12 +32,32 @@ const editEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataMo
 
         return employee;
     });
+
+    state.totalEmployee = state.employeeArray.length;
 };
 
 const deleteEmployee = (state: EmployeeState, action: PayloadAction<{employeeId: number}>) => {
     const { employeeId } = action.payload;
     
     state.employeeArray = state.employeeArray.filter(employee => employee.id !== employeeId);
+
+    state.totalEmployee = state.employeeArray.length;
+};
+
+const nextPage = (state: EmployeeState) => {
+    if (state.pageIndex === Math.floor(state.totalEmployee / 10)) {
+        return;
+    }
+    
+    state.pageIndex++;
+};
+
+const previousPage = (state: EmployeeState) => {
+    if (state.pageIndex === 0) {
+        return;
+    }
+    
+    state.pageIndex--;
 };
 
 
@@ -46,7 +68,9 @@ const employeeSlice = createSlice({
     reducers: {
         addEmployee,
         editEmployee,
-        deleteEmployee
+        deleteEmployee,
+        nextPage,
+        previousPage
     }
 });
 

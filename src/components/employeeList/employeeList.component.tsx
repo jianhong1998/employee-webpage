@@ -5,12 +5,10 @@ import EmployeeDataModel from "../../models/employeeData.model";
 import { useAppSelector } from "../../store/index.store";
 import EmployeeCard from './employeeCard.component';
 
-interface EmployeeListProps {
-    pageNumber: number;
-}
-
-const filterDisplayEmployeeArray = (fullEmployeeArray: EmployeeDataModel[], pageNumber: number): EmployeeDataModel[] => {
+const filterDisplayEmployeeArray = (fullEmployeeArray: EmployeeDataModel[], pageIndex: number): EmployeeDataModel[] => {
     const employeeArray = [] as EmployeeDataModel[];
+
+    const pageNumber = pageIndex + 1;
 
     for (let index = (pageNumber * 10) - 10; (index < fullEmployeeArray.length && index < pageNumber * 10); index++) {
         employeeArray.push(fullEmployeeArray[index]);
@@ -19,8 +17,8 @@ const filterDisplayEmployeeArray = (fullEmployeeArray: EmployeeDataModel[], page
     return employeeArray;
 }
 
-const EmployeeList: FC<EmployeeListProps> = ({pageNumber}) => {
-    const fullEmployeeArray = useAppSelector(state => state.employees.employeeArray);
+const EmployeeList: FC = () => {
+    const { employeeArray: fullEmployeeArray, pageIndex: pageNumber } = useAppSelector(state => state.employees);
 
     const [displayEmployeeArray, setDisplayEmployeeArray] = useState([] as EmployeeDataModel[]);
 
