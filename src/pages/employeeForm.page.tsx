@@ -9,8 +9,8 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import { employeeFormActions } from '../store/employeeForm.slice';
 import { Link } from 'react-router-dom';
-import Popup from '../components/ui/popup/popup.component';
-import { popupActions } from '../store/popup.slice';
+import ErrorPopup from '../components/ui/popup/errorPopup.component';
+import { errorPopupActions } from '../store/errorPopup.slice';
 import Loading from '../components/ui/loading/loading';
 import EmployeeService from '../services/employee.service';
 import EmployeeDataModel from '../models/employeeData.model';
@@ -64,10 +64,9 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
             }
             
             // Display Error in popup
-            dispatch(popupActions.openPopup({
+            dispatch(errorPopupActions.openPopup({
                 title: "Fail to update employee",
-                content: <div>{errorMessage}</div>,
-                processButton: null
+                content: errorMessage
             }));
         }
     };
@@ -101,10 +100,9 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
             }
             
             // Display Error in popup
-            dispatch(popupActions.openPopup({
+            dispatch(errorPopupActions.openPopup({
                 title: "Fail to update employee",
-                content: <div>{errorMessage}</div>,
-                processButton: null
+                content: errorMessage
             }));
         }
     };
@@ -173,7 +171,7 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
                     </div>
                 </div>
             </div>
-            <Popup />
+            <ErrorPopup />
             <Loading />
         </>
     );

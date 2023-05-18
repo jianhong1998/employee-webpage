@@ -2,15 +2,17 @@ import { configureStore } from '@reduxjs/toolkit';
 import employeeSlice from './employee.slice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import popupSlice from './popup.slice';
+import errorPopupSlice from './errorPopup.slice';
 import employeeFormSlice from './employeeForm.slice';
 import appHeaderSlice from './appHeader.slice';
 import loadingSlice from './loading.slice';
+import deletePopupSlice from './deletePopup.slice';
 
 const indexStore = configureStore({
     reducer: {
         employees: employeeSlice.reducer,
-        popup: popupSlice.reducer,
+        errorPopup: errorPopupSlice.reducer,
+        deletePopup: deletePopupSlice.reducer,
         updateEmployeeForm: employeeFormSlice.reducer,
         appTitle: appHeaderSlice.reducer,
         loading: loadingSlice.reducer

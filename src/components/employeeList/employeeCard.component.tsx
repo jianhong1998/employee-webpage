@@ -3,13 +3,11 @@ import classes from './employeeCard.module.scss';
 import { FC, MouseEventHandler } from 'react';
 import EmployeeDataModel from '../../models/employeeData.model';
 import { useAppDispatch } from '../../store/index.store';
-import { employeeActions } from '../../store/employee.slice';
 import DeleteButton from '../ui/buttons/deleteButton.component';
 import EditButton from '../ui/buttons/editButton.component';
-import PopupData from '../../models/popupData.model';
-import { popupActions } from '../../store/popup.slice';
 import { employeeFormActions } from '../../store/employeeForm.slice';
 import { Link } from 'react-router-dom';
+import { deletePopupActions } from '../../store/deletePopup.slice';
 
 interface EmployeeCardProps {
     employee: EmployeeDataModel;
@@ -18,23 +16,15 @@ interface EmployeeCardProps {
 const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
     const { id, name, department, salary } = employee;
     const dispatch = useAppDispatch();
-    
-    const deleteEmployeeHandler = (employeeId: number) => {
-        dispatch(employeeActions.deleteEmployee({employeeId}));
-        dispatch(popupActions.closePopup());
-    }
 
     const deleteButtonOnclickHandler: MouseEventHandler = () => {
-        const popupData = {
-            title: "Are you sure?",
-            content: <>Employee will be deleted.</>,
-            processButton: {
-                content: "DELETE",
-                processHandler: () => deleteEmployeeHandler(id)
+        dispatch(deletePopupActions.openPopup({
+            employeeId: id,
+            popupData: {
+                title: "Are you sure?",
+                content: "Employee will be deleted."
             }
-        } as PopupData;
-        
-        dispatch(popupActions.openPopup(popupData));
+        }));
     };
 
     const editButtonOnClickHandler: MouseEventHandler = () => {

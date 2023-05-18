@@ -1,19 +1,21 @@
+import classes from './popup.module.scss';
+
 import { FC, MouseEventHandler } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/index.store";
-import popupSlice from "../../../store/popup.slice";
+import errorPopupSlice from "../../../store/errorPopup.slice";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 
-const Popup: FC = () => {
-    const popupState = useAppSelector(state => state.popup);
+const ErrorPopup: FC = () => {
+    const popupState = useAppSelector(state => state.errorPopup);
     const dispatch = useAppDispatch();
 
     const closeButtonOnClickHandler: MouseEventHandler = () => {
-        dispatch(popupSlice.actions.closePopup());
+        dispatch(errorPopupSlice.actions.closePopup());
     };
     
     return (
         <Dialog data-modal open={popupState.openState}>
-            <DialogTitle>
+            <DialogTitle className={classes.title}>
                 {popupState.title}
             </DialogTitle>
             <DialogContent>
@@ -21,15 +23,9 @@ const Popup: FC = () => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={closeButtonOnClickHandler}>Close</Button>
-                {
-                    popupState.processButton !== null &&
-                    <Button onClick={popupState.processButton.processHandler}>
-                        {popupState.processButton.content}
-                    </Button>
-                }
             </DialogActions>
         </Dialog>
     );
 }
 
-export default Popup;
+export default ErrorPopup;
