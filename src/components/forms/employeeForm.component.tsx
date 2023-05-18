@@ -1,12 +1,12 @@
-import classes from './updateEmployeeForm.module.scss';
+import classes from './employeeForm.module.scss';
 
 import { FormControl, MenuItem, TextField } from "@mui/material";
 import { ChangeEventHandler, FC } from "react";
 import DepartmentType from "../../models/departmentType.enum";
 import { useAppDispatch, useAppSelector } from '../../store/index.store';
-import { updateEmployeeFormActions } from '../../store/updateEmployeeForm.slice';
+import { employeeFormActions } from '../../store/employeeForm.slice';
 
-const UpdateEmployeeForm: FC = () => {
+const EmployeeForm: FC = () => {
     const dispatch = useAppDispatch();
     
     const { nameInputData, departmentInputData, salaryInputData } = useAppSelector(state => state.updateEmployeeForm);
@@ -15,7 +15,7 @@ const UpdateEmployeeForm: FC = () => {
         const value = event.target.value;
 
         if (value.length === 0) {
-            dispatch(updateEmployeeFormActions.updateSalary({
+            dispatch(employeeFormActions.updateSalary({
                 dataValue: "",
                 errorMessage: undefined
             }));
@@ -30,7 +30,7 @@ const UpdateEmployeeForm: FC = () => {
             return;
         }
 
-        dispatch(updateEmployeeFormActions.updateSalary({
+        dispatch(employeeFormActions.updateSalary({
             dataValue: formattedValue,
             errorMessage: undefined
         }));
@@ -39,7 +39,7 @@ const UpdateEmployeeForm: FC = () => {
     const nameOnChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
         const name = event.target.value;
 
-        dispatch(updateEmployeeFormActions.updateName({
+        dispatch(employeeFormActions.updateName({
             dataValue: name,
             errorMessage: undefined
         }));
@@ -48,7 +48,7 @@ const UpdateEmployeeForm: FC = () => {
     const departmentOnChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
         const department = event.target.value as DepartmentType;
 
-        dispatch(updateEmployeeFormActions.updateDepartment({
+        dispatch(employeeFormActions.updateDepartment({
             dataValue: department,
             errorMessage: undefined
         }));
@@ -92,4 +92,4 @@ const UpdateEmployeeForm: FC = () => {
     );
 }
 
-export default UpdateEmployeeForm;
+export default EmployeeForm;

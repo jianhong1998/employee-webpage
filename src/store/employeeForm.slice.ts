@@ -3,14 +3,14 @@ import InputData from "../models/inputState.model";
 import DepartmentType from "../models/departmentType.enum";
 
 
-interface UpdateEmployeeFormState {
+interface EmployeeFormState {
     idInputData: InputData<number>;
     nameInputData: InputData<string>;
     salaryInputData: InputData<string>;
     departmentInputData: InputData<DepartmentType | undefined>;
 }
 
-const initialUpdateEmployeeState: UpdateEmployeeFormState = {
+const initialEmployeeFormState: EmployeeFormState = {
     idInputData: {
         dataValue: -1,
         errorMessage: undefined
@@ -29,27 +29,27 @@ const initialUpdateEmployeeState: UpdateEmployeeFormState = {
     }
 };
 
-const updateId = (state: UpdateEmployeeFormState, action: PayloadAction<InputData<number>>) => {
+const updateId = (state: EmployeeFormState, action: PayloadAction<InputData<number>>) => {
     state.idInputData.dataValue = action.payload.dataValue;
     state.idInputData.errorMessage = action.payload.errorMessage;
 }
 
-const updateName = (state: UpdateEmployeeFormState, action: PayloadAction<InputData<string>>) => {
+const updateName = (state: EmployeeFormState, action: PayloadAction<InputData<string>>) => {
     state.nameInputData.dataValue = action.payload.dataValue;
     state.nameInputData.errorMessage = action.payload.errorMessage;
 };
 
-const updateSalary = (state: UpdateEmployeeFormState, action: PayloadAction<InputData<string>>) => {
+const updateSalary = (state: EmployeeFormState, action: PayloadAction<InputData<string>>) => {
     state.salaryInputData.dataValue = action.payload.dataValue;
     state.salaryInputData.errorMessage = action.payload.errorMessage;
 };
 
-const updateDepartment = (state: UpdateEmployeeFormState, action: PayloadAction<InputData<DepartmentType | undefined>>) => {
+const updateDepartment = (state: EmployeeFormState, action: PayloadAction<InputData<DepartmentType | undefined>>) => {
     state.departmentInputData.dataValue = action.payload.dataValue;
     state.departmentInputData.errorMessage = action.payload.errorMessage;
 };
 
-const clear = (state: UpdateEmployeeFormState) => {
+const clear = (state: EmployeeFormState) => {
     state.departmentInputData.dataValue = undefined;
     state.departmentInputData.errorMessage = undefined;
     state.nameInputData.dataValue = "";
@@ -60,9 +60,9 @@ const clear = (state: UpdateEmployeeFormState) => {
     state.idInputData.errorMessage = undefined;
 };
 
-const updateEmployeeFormSlice = createSlice({
-    name: 'updateEmployeeFormSlice',
-    initialState: initialUpdateEmployeeState,
+const employeeFormSlice = createSlice({
+    name: 'employeeFormSlice',
+    initialState: initialEmployeeFormState,
     reducers: {
         updateId,
         updateName,
@@ -72,10 +72,10 @@ const updateEmployeeFormSlice = createSlice({
     }
 });
 
-const updateEmployeeFormActions = updateEmployeeFormSlice.actions;
+const employeeFormActions = employeeFormSlice.actions;
 
 export {
-    updateEmployeeFormActions
+    employeeFormActions
 };
 
-export default updateEmployeeFormSlice;
+export default employeeFormSlice;

@@ -8,8 +8,7 @@ import DeleteButton from '../ui/buttons/deleteButton.component';
 import EditButton from '../ui/buttons/editButton.component';
 import PopupData from '../../models/popupData.model';
 import { popupActions } from '../../store/popup.slice';
-import { updateEmployeeFormActions } from '../../store/updateEmployeeForm.slice';
-import InputData from '../../models/inputState.model';
+import { employeeFormActions } from '../../store/employeeForm.slice';
 import { Link } from 'react-router-dom';
 
 interface EmployeeCardProps {
@@ -39,21 +38,21 @@ const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
     };
 
     const editButtonOnClickHandler: MouseEventHandler = () => {
-        dispatch(updateEmployeeFormActions.updateSalary({
+        dispatch(employeeFormActions.updateSalary({
             dataValue: salary.toString(),
             errorMessage: undefined
         }));
 
-        dispatch(updateEmployeeFormActions.updateName({
+        dispatch(employeeFormActions.updateName({
             dataValue: name,
             errorMessage: undefined
         }));
-        dispatch(updateEmployeeFormActions.updateDepartment({
+        dispatch(employeeFormActions.updateDepartment({
             dataValue: department,
             errorMessage: undefined
         }));
 
-        dispatch(updateEmployeeFormActions.updateId({
+        dispatch(employeeFormActions.updateId({
             dataValue: id,
             errorMessage: undefined
         }));
@@ -64,7 +63,7 @@ const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
             <div className={classes.left}>
                 <div className={`${classes.name}`}>{name}</div>
                 <div>{department}</div>
-                <div>{salary}</div>
+                <div>{`$${salary.toFixed(2)}`}</div>
             </div>
             <div className={classes.right}>
                 <Link to={'/edit-employee'}>

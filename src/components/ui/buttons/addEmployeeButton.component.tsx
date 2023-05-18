@@ -1,14 +1,11 @@
 import classes from './addEmployeeButton.module.scss';
 
-import { FC, MouseEventHandler, useEffect, useState } from "react";
+import { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
 import { Button, IconButton, ThemeProvider, createTheme } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useAppDispatch } from "../../../store/index.store";
-import { employeeActions } from "../../../store/employee.slice";
-import EmployeeDataModel from "../../../models/employeeData.model";
-import DepartmentType from "../../../models/departmentType.enum";
-
-let employeeIdRunning = 0;
+import { employeeFormActions } from '../../../store/employeeForm.slice';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme({
     palette: {
@@ -22,6 +19,7 @@ const AddEmployeeButton: FC = () => {
     const dispatch = useAppDispatch();
 
     const [windowSize, setWindowSize] = useState(window.innerWidth);
+    const linkRef = useRef<HTMLAnchorElement>(null);
 
     const handleResize = () => {
         setWindowSize(window.innerWidth);
@@ -36,20 +34,13 @@ const AddEmployeeButton: FC = () => {
     }, []);
 
     const onClickHandler: MouseEventHandler = () => {
-        employeeIdRunning++;
-        
-        const employee: EmployeeDataModel = {
-            id: employeeIdRunning,
-            name: `Jian Hong ${employeeIdRunning}`,
-            salary: 1200,
-            department: DepartmentType.PS
-        };
-        
-        dispatch(employeeActions.addEmployee(employee));
+        dispatch(employeeFormActions.clear());
+        linkRef.current?.click();
     }
     
     return (
         <ThemeProvider theme={theme}>
+            <Link ref={linkRef} to={'/new-employee'} style={{display: 'none'}} />
             {
                 windowSize >= 992 &&
                 <Button

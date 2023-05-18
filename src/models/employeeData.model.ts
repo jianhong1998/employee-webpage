@@ -1,8 +1,5 @@
-import DepartmentType from "./departmentType.enum";
+import NewEmployeeDataModel from "./newEmployeeData.model";
 
-export default interface EmployeeDataModel {
+export default interface EmployeeDataModel extends NewEmployeeDataModel {
     id: number;
-    name: string;
-    department: DepartmentType;
-    salary: number;
 }
