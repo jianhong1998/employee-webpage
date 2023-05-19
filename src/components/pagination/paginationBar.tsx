@@ -63,7 +63,7 @@ const PaginationBar: FC = () => {
                 </div>
             }
             {
-                totalEmployee > 0 &&
+                totalEmployee > 10 &&
                 <div className={classes.pageControlContainer}>
                     <div>
                         <button

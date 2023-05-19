@@ -53,7 +53,7 @@ const EmployeeCard: FC<EmployeeCardProps> = ({employee}) => {
             <div className={classes.left}>
                 <div className={`${classes.name}`}>{name}</div>
                 <div>{department}</div>
-                <div>{`$${salary.toFixed(2)}`}</div>
+                <div>{`${salary.toLocaleString('en-sg', {style: 'currency', currency: 'SGD'})}`}</div>
             </div>
             <div className={classes.right}>
                 <Link to={'/edit-employee'}>
