@@ -19,17 +19,32 @@ const DeleteEmployeePopup: FC = () => {
     };
 
     const deleteButtonOnClickHandler: MouseEventHandler = async () => {
-        if (typeof employeeId === "undefined") {
+        try {
+            if (typeof employeeId === "undefined") {
+                dispatch(deletePopupActions.closePopup());
+                dispatch(errorPopupActions.openPopup({
+                    title: 'Lack of data',
+                    content: "employeeId is undefined."
+                }));
+                return;
+            }
+            
             dispatch(deletePopupActions.closePopup());
+            await dispatch(EmployeeService.deleteEmployee(employeeId));
+        } catch (error) {
+            let errorMessage: string;
+
+            if (error instanceof Error) {
+                errorMessage = error.message;
+            } else {
+                errorMessage = String(error);
+            }
+
             dispatch(errorPopupActions.openPopup({
-                title: 'Lack of data',
-                content: "employeeId is undefined."
+                title: 'Fail to fetch from backend server',
+                content: errorMessage
             }));
-            return;
         }
-        
-        dispatch(deletePopupActions.closePopup());
-        await dispatch(EmployeeService.deleteEmployee(employeeId));
     };
     
     return (
