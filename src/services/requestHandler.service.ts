@@ -106,8 +106,6 @@ export default class RequestHandler {
                     body: JSON.stringify(requestBody)
                 });
 
-                console.log(response);
-
                 if (response.status === 304) {
                     throw new Error('Employee data is no change.');
                 }
