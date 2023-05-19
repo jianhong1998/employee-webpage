@@ -39,6 +39,10 @@ const EmployeeForm: FC = () => {
     const nameOnChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
         const name = event.target.value;
 
+        if (name.length > 30) {
+            return;
+        }
+
         dispatch(employeeFormActions.updateName({
             dataValue: name,
             errorMessage: undefined

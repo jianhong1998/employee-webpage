@@ -16,6 +16,8 @@ const initialEmployeeState: EmployeeState = {
 const initialEmployeeArray = (state: EmployeeState, action: PayloadAction<EmployeeDataModel[]>) => {
     const employeeArray = action.payload;
 
+    employeeArray.sort((a, b) => a.id - b.id);
+
     state.employeeArray = employeeArray;
     state.totalEmployee = employeeArray.length;
 }

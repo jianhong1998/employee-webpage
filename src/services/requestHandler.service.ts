@@ -40,8 +40,11 @@ export default class RequestHandler {
             try {
                 const requestBody = newEmployee;
                 const { isEmployeeDataModel, isError } = EmployeeResponseVerification;
-
                 const url = `${ServerConfig.backendUrl}/api/employee`;
+
+                if (requestBody.name.length < 4 || requestBody.name.length > 30) {
+                    throw new Error('Name must be minimum 4 characters and maximum 30 characters.');
+                }
 
                 const response = await fetch(url, {
                     method: HttpRequestMethod.POST,
@@ -90,6 +93,10 @@ export default class RequestHandler {
                 const { isEmployeeDataModel, isError } = EmployeeResponseVerification;
 
                 const url = `${ServerConfig.backendUrl}/api/employee/${id}`;
+
+                if (requestBody.name.length < 4 || requestBody.name.length > 30) {
+                    throw new Error('Name must be minimum 4 characters and maximum 30 characters.');
+                }
 
                 const response = await fetch(url, {
                     method: HttpRequestMethod.PUT,
