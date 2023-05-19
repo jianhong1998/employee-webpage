@@ -13,6 +13,13 @@ const initialEmployeeState: EmployeeState = {
     pageIndex: 0
 };
 
+const initialEmployeeArray = (state: EmployeeState, action: PayloadAction<EmployeeDataModel[]>) => {
+    const employeeArray = action.payload;
+
+    state.employeeArray = employeeArray;
+    state.totalEmployee = employeeArray.length;
+}
+
 const addEmployee = (state: EmployeeState, action: PayloadAction<EmployeeDataModel>) => {
     const employee = action.payload;
     
@@ -42,6 +49,10 @@ const deleteEmployee = (state: EmployeeState, action: PayloadAction<{employeeId:
     state.employeeArray = state.employeeArray.filter(employee => employee.id !== employeeId);
 
     state.totalEmployee = state.employeeArray.length;
+
+    if (state.totalEmployee < (state.pageIndex + 1) * 10 - 9) {
+        state.pageIndex--;
+    }
 };
 
 const nextPage = (state: EmployeeState) => {
@@ -66,6 +77,7 @@ const employeeSlice = createSlice({
     name: 'employeeSlice',
     initialState: initialEmployeeState,
     reducers: {
+        initialEmployeeArray,
         addEmployee,
         editEmployee,
         deleteEmployee,

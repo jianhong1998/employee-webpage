@@ -8,6 +8,9 @@ import DeleteEmployeePopup from '../components/ui/popup/deleteEmployeePopup.comp
 import ErrorPopup from '../components/ui/popup/errorPopup.component';
 import Loading from '../components/ui/loading/loading';
 import PaginationBar from '../components/pagination/paginationBar';
+import EmployeeService from '../services/employee.service';
+
+let isInitialised: boolean = false;
 
 const HomePage: FC = () => {
     const dispatch = useAppDispatch();
@@ -15,6 +18,11 @@ const HomePage: FC = () => {
 
     useEffect(() => {
         dispatch(appHeaderAction.setTitle({title: 'Employees'}));
+        
+        if (!isInitialised) {
+            dispatch(EmployeeService.getAllEmployees());
+            isInitialised = true;
+        }
     }, [dispatch]);
     
     return (
