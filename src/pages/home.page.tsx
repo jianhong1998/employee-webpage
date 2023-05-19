@@ -9,6 +9,7 @@ import ErrorPopup from '../components/ui/popup/errorPopup.component';
 import Loading from '../components/ui/loading/loading';
 import PaginationBar from '../components/pagination/paginationBar';
 import EmployeeService from '../services/employee.service';
+import { errorPopupActions } from '../store/errorPopup.slice';
 
 let isInitialised: boolean = false;
 
@@ -20,7 +21,21 @@ const HomePage: FC = () => {
         dispatch(appHeaderAction.setTitle({title: 'Employees'}));
         
         if (!isInitialised) {
-            dispatch(EmployeeService.getAllEmployees());
+            dispatch(EmployeeService.getAllEmployees())
+            .catch(error => {
+                let errorMessage: string;
+    
+                if (error instanceof Error) {
+                    errorMessage = error.message;
+                } else {
+                    errorMessage = String(error);
+                }
+    
+                dispatch(errorPopupActions.openPopup({
+                    title: 'Fail to fetch from backend server',
+                    content: errorMessage
+                }));
+            });
             isInitialised = true;
         }
     }, [dispatch]);

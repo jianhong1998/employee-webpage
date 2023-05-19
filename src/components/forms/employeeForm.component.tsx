@@ -26,7 +26,7 @@ const EmployeeForm: FC = () => {
 
         const parts = formattedValue.split('.');
 
-        if (parts.length > 1 && parts[1].length > 2) {
+        if ((parts.length === 2 && parts[1].length > 2) || parts.length > 2) {
             return;
         }
 
