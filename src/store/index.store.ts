@@ -7,6 +7,7 @@ import employeeFormSlice from './employeeForm.slice';
 import appHeaderSlice from './appHeader.slice';
 import loadingSlice from './loading.slice';
 import deletePopupSlice from './deletePopup.slice';
+import userFormSlice from './userForm.slice';
 
 const indexStore = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ const indexStore = configureStore({
         deletePopup: deletePopupSlice.reducer,
         updateEmployeeForm: employeeFormSlice.reducer,
         appTitle: appHeaderSlice.reducer,
-        loading: loadingSlice.reducer
+        loading: loadingSlice.reducer,
+        userForm: userFormSlice.reducer
     }
 });
 

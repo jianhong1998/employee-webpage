@@ -5,6 +5,8 @@ import HomePage from './pages/home.page';
 
 import EmployeeFormPage from './pages/employeeForm.page';
 import EmployeeFormMode from './models/employeeFormMode.enum';
+import UserFormPage from './pages/userForm.page';
+import UserFormMode from './models/userFormMode.enum';
 
 function App() {
   return (
@@ -13,6 +15,10 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path='/new-employee' element={<EmployeeFormPage mode={EmployeeFormMode.CREATE} />} />
         <Route path='/edit-employee' element={<EmployeeFormPage mode={EmployeeFormMode.UPDATE} />} />
+      </Route>
+      <Route path='/user'>
+        <Route path='login' element={<UserFormPage mode={UserFormMode.LOGIN} />} />
+        <Route path='sign-up' element={<UserFormPage mode={UserFormMode.SIGNUP} />} />
       </Route>
     </Routes>
   );

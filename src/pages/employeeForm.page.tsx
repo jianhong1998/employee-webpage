@@ -1,4 +1,4 @@
-import classes from './employeeForm.module.scss';
+import classes from './formPage.module.scss';
 
 import { FC, MouseEventHandler, useCallback, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../store/index.store";
@@ -7,6 +7,7 @@ import EmployeeForm from '../components/forms/employeeForm.component';
 import { Button } from '@mui/material';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { employeeFormActions } from '../store/employeeForm.slice';
 import { Link } from 'react-router-dom';
 import ErrorPopup from '../components/ui/popup/errorPopup.component';
@@ -15,7 +16,6 @@ import Loading from '../components/ui/loading/loading';
 import EmployeeService from '../services/employee.service';
 import EmployeeDataModel from '../models/employeeData.model';
 import EmployeeFormMode from '../models/employeeFormMode.enum';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import NewEmployeeDataModel from '../models/newEmployeeData.model';
 
 interface EmployeeFormPageProps {

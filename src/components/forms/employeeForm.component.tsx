@@ -1,4 +1,4 @@
-import classes from './employeeForm.module.scss';
+import classes from './employeeForm.component.module.scss';
 
 import { FormControl, MenuItem, TextField } from "@mui/material";
 import { ChangeEventHandler, FC } from "react";
