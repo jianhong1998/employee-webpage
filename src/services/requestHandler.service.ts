@@ -3,6 +3,7 @@ import HttpRequestMethod from "../models/httpRequestMethod.enum";
 import NewEmployeeDataModel from "../models/newEmployeeData.model";
 import ServerConfig from "./serverConfig.service";
 import EmployeeResponseVerification from "./employeeResponseVerification.service";
+import TokenHandler from "./tokenService/tokenHandler.service";
 
 export default class RequestHandler {
     public static async getAllEmployeesRequest (): Promise<EmployeeDataModel[]> {
@@ -11,9 +12,14 @@ export default class RequestHandler {
                 let employeeArray: EmployeeDataModel[] = [];
         
                 const backendUrl = ServerConfig.backendUrl;
+
+                const token = TokenHandler.getToken();
         
                 const response = await fetch(`${backendUrl}/api/employee`, {
-                    method: HttpRequestMethod.GET
+                    method: HttpRequestMethod.GET,
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
 
                 const result = (await response.json()) as {employees: EmployeeDataModel[]};
@@ -46,10 +52,13 @@ export default class RequestHandler {
                     throw new Error('Name must be minimum 4 characters and maximum 30 characters.');
                 }
 
+                const token = TokenHandler.getToken();
+
                 const response = await fetch(url, {
                     method: HttpRequestMethod.POST,
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(requestBody)
                 });
@@ -98,10 +107,13 @@ export default class RequestHandler {
                     throw new Error('Name must be minimum 4 characters and maximum 30 characters.');
                 }
 
+                const token = TokenHandler.getToken();
+
                 const response = await fetch(url, {
                     method: HttpRequestMethod.PUT,
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(requestBody)
                 });
@@ -142,8 +154,13 @@ export default class RequestHandler {
 
                 const { isError } = EmployeeResponseVerification;
                 
+                const token = TokenHandler.getToken();
+
                 const response = await fetch(url, {
-                    method: HttpRequestMethod.DELETE
+                    method: HttpRequestMethod.DELETE,
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
 
                 if (response.status === 204) {

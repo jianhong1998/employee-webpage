@@ -1,6 +1,6 @@
 import classes from './home.module.scss';
 
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import EmployeeList from "../components/employeeList/employeeList.component";
 import { useAppDispatch, useAppSelector } from '../store/index.store';
 import { appHeaderAction } from '../store/appHeader.slice';
@@ -10,6 +10,8 @@ import Loading from '../components/ui/loading/loading';
 import PaginationBar from '../components/pagination/paginationBar';
 import EmployeeService from '../services/employee.service';
 import { errorPopupActions } from '../store/errorPopup.slice';
+import { Link } from 'react-router-dom';
+import TokenHandler from '../services/tokenService/tokenHandler.service';
 
 let isInitialised: boolean = false;
 
@@ -17,7 +19,16 @@ const HomePage: FC = () => {
     const dispatch = useAppDispatch();
     const { totalEmployee } = useAppSelector(state => state.employees);
 
+    const linkRef = useRef<HTMLAnchorElement>(null);
+    
     useEffect(() => {
+        try {
+            TokenHandler.getToken();
+        } catch (error) {
+            linkRef.current?.click();
+            return;
+        }
+
         dispatch(appHeaderAction.setTitle({title: 'Employees'}));
         
         if (!isInitialised) {
@@ -42,6 +53,7 @@ const HomePage: FC = () => {
     
     return (
         <>
+            <Link to={'/user/login'} ref={linkRef} style={{display: 'none'}} />
             <section className={`${classes.bodyContainer}`}>
                 <div className={`${classes.employeeListContainer}`}>
                     {

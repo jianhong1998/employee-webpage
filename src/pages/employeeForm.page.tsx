@@ -17,6 +17,7 @@ import EmployeeService from '../services/employee.service';
 import EmployeeDataModel from '../models/employeeData.model';
 import EmployeeFormMode from '../models/employeeFormMode.enum';
 import NewEmployeeDataModel from '../models/newEmployeeData.model';
+import TokenHandler from '../services/tokenService/tokenHandler.service';
 
 interface EmployeeFormPageProps {
     mode: EmployeeFormMode
@@ -106,6 +107,15 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
             }));
         }
     };
+
+    useEffect(() => {
+        try {
+            TokenHandler.getToken();
+        } catch (error) {
+            linkRef.current?.click();
+            return;
+        }
+    }, []);
 
     useEffect(() => {
         switch(mode) {

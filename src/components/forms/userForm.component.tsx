@@ -28,7 +28,7 @@ const UserForm: FC<UserFormProps> = ({ mode }) => {
         if (event.target.value.length > 20) {
             return;
         }
-
+        
         if (event.target.value.length > 0 && event.target.value.split(' ').length > 1) {
             return;
         }

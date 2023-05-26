@@ -18,7 +18,7 @@ const setUsername = (state: UserFormState, action: PayloadAction<string>) => {
 
 
 const setPassword = (state: UserFormState, action: PayloadAction<string>) => {
-    if (action.payload.length >= 20) return;
+    if (action.payload.length > 20) return;
 
     state.password = action.payload;
 };
