@@ -46,7 +46,6 @@ const HomePage: FC = () => {
 
                 if (errorMessage.includes('Token is expired')) {
                     linkRef.current?.click();
-                    return;
                 }
     
                 dispatch(errorPopupActions.openPopup({

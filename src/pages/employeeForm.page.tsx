@@ -64,9 +64,8 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
                 errorMessage = String(error);
             }
 
-            if (errorMessage.includes('Token is expired')) {
+            if (errorMessage.includes('expired')) {
                 backToHomePageHandler();
-                return;
             }
             
             // Display Error in popup
@@ -105,9 +104,8 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
                 errorMessage = String(error);
             }
 
-            if (errorMessage.includes('Token is expired')) {
+            if (errorMessage.includes('expired')) {
                 backToHomePageHandler();
-                return;
             }
             
             // Display Error in popup

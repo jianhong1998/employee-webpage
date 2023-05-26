@@ -1,14 +1,17 @@
 import classes from './popup.module.scss';
 
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/index.store";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import { deletePopupActions } from "../../../store/deletePopup.slice";
 import { errorPopupActions } from "../../../store/errorPopup.slice";
 import EmployeeService from "../../../services/employee.service";
+import { Link } from 'react-router-dom';
 
 
 const DeleteEmployeePopup: FC = () => {
+    const linkRef = useRef<HTMLAnchorElement>(null);
+    
     const popupState = useAppSelector(state => state.deletePopup);
     const dispatch = useAppDispatch();
 
@@ -40,6 +43,10 @@ const DeleteEmployeePopup: FC = () => {
                 errorMessage = String(error);
             }
 
+            if (errorMessage.includes('expired')) {
+                linkRef.current?.click();
+            }
+
             dispatch(errorPopupActions.openPopup({
                 title: 'Fail to fetch from backend server',
                 content: errorMessage
@@ -48,18 +55,25 @@ const DeleteEmployeePopup: FC = () => {
     };
     
     return (
-        <Dialog data-modal open={popupState.openState}>
-            <DialogTitle  className={`${classes.title} ${classes.warning}`}>
-                {popupState.title}
-            </DialogTitle>
-            <DialogContent>
-                {popupState.content}
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={closeButtonOnClickHandler}>Close</Button>
-                <Button onClick={deleteButtonOnClickHandler} color={'error'}>Delete</Button>
-            </DialogActions>
-        </Dialog>
+        <>
+            <Link
+                to={'/user/login'}
+                ref={linkRef}
+                style={{display: "none"}}
+            />
+            <Dialog data-modal open={popupState.openState}>
+                <DialogTitle  className={`${classes.title} ${classes.warning}`}>
+                    {popupState.title}
+                </DialogTitle>
+                <DialogContent>
+                    {popupState.content}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={closeButtonOnClickHandler}>Close</Button>
+                    <Button onClick={deleteButtonOnClickHandler} color={'error'}>Delete</Button>
+                </DialogActions>
+            </Dialog>
+        </>
     );
 }
 
