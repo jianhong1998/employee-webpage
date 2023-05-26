@@ -5,8 +5,17 @@
     padding: 1em;
     height: 10vh;
     background-color: var(--employee-card-blue);
-}
+    
+    .logoutButton {
+        margin: 0 1em 0 0;
 
-.title {
-    color: #ffffff;
+        @media only screen and (max-width: 991.98px) {
+            margin: 0;
+        }
+    }
+
+    
+    .title {
+        color: #ffffff;
+    }
 }

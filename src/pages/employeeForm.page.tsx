@@ -63,6 +63,11 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
             } else {
                 errorMessage = String(error);
             }
+
+            if (errorMessage.includes('Token is expired')) {
+                backToHomePageHandler();
+                return;
+            }
             
             // Display Error in popup
             dispatch(errorPopupActions.openPopup({
@@ -98,6 +103,11 @@ const EmployeeFormPage: FC<EmployeeFormPageProps> = ({mode}) => {
                 errorMessage = error.message;
             } else {
                 errorMessage = String(error);
+            }
+
+            if (errorMessage.includes('Token is expired')) {
+                backToHomePageHandler();
+                return;
             }
             
             // Display Error in popup

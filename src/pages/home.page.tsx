@@ -12,12 +12,14 @@ import EmployeeService from '../services/employee.service';
 import { errorPopupActions } from '../store/errorPopup.slice';
 import { Link } from 'react-router-dom';
 import TokenHandler from '../services/tokenService/tokenHandler.service';
+import LogoutPopup from '../components/ui/popup/logoutPopup.component';
 
 let isInitialised: boolean = false;
 
 const HomePage: FC = () => {
     const dispatch = useAppDispatch();
     const { totalEmployee } = useAppSelector(state => state.employees);
+    const { user, token } = useAppSelector(state => state.loggedInUser);
 
     const linkRef = useRef<HTMLAnchorElement>(null);
     
@@ -41,6 +43,11 @@ const HomePage: FC = () => {
                 } else {
                     errorMessage = String(error);
                 }
+
+                if (errorMessage.includes('Token is expired')) {
+                    linkRef.current?.click();
+                    return;
+                }
     
                 dispatch(errorPopupActions.openPopup({
                     title: 'Fail to fetch from backend server',
@@ -50,6 +57,10 @@ const HomePage: FC = () => {
             isInitialised = true;
         }
     }, [dispatch]);
+
+    useEffect(() => {
+        isInitialised = false;
+    }, [user, token]);
     
     return (
         <>
@@ -73,6 +84,7 @@ const HomePage: FC = () => {
             </section>
             <DeleteEmployeePopup />
             <ErrorPopup />
+            <LogoutPopup />
             <Loading />
         </>
     );

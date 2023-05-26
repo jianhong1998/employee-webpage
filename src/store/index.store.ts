@@ -9,6 +9,7 @@ import loadingSlice from './loading.slice';
 import deletePopupSlice from './deletePopup.slice';
 import userFormSlice from './userForm.slice';
 import loggedInUserSlice from './loggedInUser.slice';
+import logoutPopupSlice from './logoutPopup.slice';
 
 const indexStore = configureStore({
     reducer: {
@@ -19,7 +20,8 @@ const indexStore = configureStore({
         appTitle: appHeaderSlice.reducer,
         loading: loadingSlice.reducer,
         userForm: userFormSlice.reducer,
-        loggedInUser: loggedInUserSlice.reducer
+        loggedInUser: loggedInUserSlice.reducer,
+        logoutPopup: logoutPopupSlice.reducer
     }
 });
 

@@ -20,6 +20,10 @@ export default class TokenHandler {
             throw new Error('Token cannot be stored in localStorage. Something went wrong.');
         }
     }
+
+    public static clearToken(): void {
+        localStorage.removeItem('token');
+    }
     
     public static decodeToken(token: string): DecodedTokenObject {
         const decoded = JwtDecode(token);

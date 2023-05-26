@@ -4,6 +4,7 @@ import classes from './header.module.scss';
 
 import { FC } from "react";
 import { useAppSelector } from '../../store/index.store';
+import LogoutButton from '../ui/buttons/logoutButton.component';
 
 const Header: FC = () => {
     const { title } = useAppSelector(state => state.appTitle);
@@ -16,12 +17,13 @@ const Header: FC = () => {
                         {title}
                     </h1>
                 </div>
-                {
-                    document.location.pathname === "/" &&
-                    <div>
+                <div>
+                    <LogoutButton className={`${classes.logoutButton}`} />
+                    {
+                        document.location.pathname === "/" &&
                         <AddEmployeeButton />
-                    </div>
-                }
+                    }
+                </div>
             </header>
             <Outlet />
         </>

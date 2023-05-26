@@ -22,6 +22,11 @@ export default class RequestHandler {
                     }
                 });
 
+                if (response.status === 401) {
+                    TokenHandler.clearToken();
+                    throw new Error('Token is expired.');
+                }
+
                 const result = (await response.json()) as {employees: EmployeeDataModel[]};
 
                 employeeArray = result.employees;
@@ -62,6 +67,11 @@ export default class RequestHandler {
                     },
                     body: JSON.stringify(requestBody)
                 });
+
+                if (response.status === 401) {
+                    TokenHandler.clearToken();
+                    throw new Error('Token is expired.');
+                }
 
                 const result = await response.json();
 
@@ -118,6 +128,11 @@ export default class RequestHandler {
                     body: JSON.stringify(requestBody)
                 });
 
+                if (response.status === 401) {
+                    TokenHandler.clearToken();
+                    throw new Error('Token is expired.');
+                }
+
                 if (response.status === 304) {
                     throw new Error('Employee data is no change.');
                 }
@@ -162,6 +177,11 @@ export default class RequestHandler {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+
+                if (response.status === 401) {
+                    TokenHandler.clearToken();
+                    throw new Error('Token is expired.');
+                }
 
                 if (response.status === 204) {
                     resolve();
